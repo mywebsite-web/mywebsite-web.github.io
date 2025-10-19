@@ -1408,9 +1408,158 @@
             font-size: 0.9rem;
             font-weight: 500;
         }
+
+        /* Attendance Section */
+        .attendance-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+        }
+
+        .attendance-form {
+            display: none;
+        }
+
+        .player-checkbox {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #attendanceStatus {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--gray-100);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .admin-button {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .admin-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .submit-button {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .attendance-record {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .attendance-record h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .attendance-record ul {
+            list-style-type: none;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #dc2626;
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .delete-button:hover {
+            background: #b91c1c;
+        }
+
+        #historicalAttendance {
+            margin-top: 2rem;
+        }
+
+        .edit-button {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        .edit-button:hover {
+            background: var(--primary-color);
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .edit-form input, .edit-form textarea {
+            width: 100%;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 4px;
+        }
+
+        .edit-form button {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-form button:hover {
+            background: #d97706;
+        }
     </style>
 </head>
 <body>
+
+
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-close" onclick="closeMobileNav()">&times;</div>
@@ -1422,6 +1571,7 @@
             <li><a onclick="showSection('updates'); closeMobileNav()">Updates</a></li>
             <li><a onclick="showSection('gallery'); closeMobileNav()">Gallery</a></li>
             <li><a onclick="showSection('contact'); closeMobileNav()">Contact</a></li>
+            <li><a onclick="showSection('attendance'); closeMobileNav()">Attendance</a></li>
         </ul>
     </div>
 
@@ -1437,8 +1587,9 @@
                 <li><a onclick="showSection('updates')" aria-label="Updates section">Updates</a></li>
                 <li><a onclick="showSection('gallery')" aria-label="Gallery section">Gallery</a></li>
                 <li><a onclick="showSection('contact')" aria-label="Contact section">Contact</a></li>
+                <li><a onclick="showSection('attendance')" aria-label="Attendance section">Attendance</a></li>
             </ul>
-            <div class="mobile-menu" aria-label="Toggle mobile menu">
+            <div class="mobile-menu" onclick="openMobileNav()" aria-label="Toggle mobile menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1448,7 +1599,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="section hero active" role="banner">
-        <div class="menu-icon" aria-label="Open mobile menu">
+        <div class="menu-icon" onclick="openMobileNav()" aria-label="Open mobile menu">
             <i class="fas fa-th"></i>
         </div>
         <div class="search-icon" aria-label="Search">
@@ -1457,83 +1608,51 @@
         
         <div class="hero-content">
             <div class="hero-main-text">
-                <h1>NALLS 200LVL</h1>
-                <h2>200lvl Linguistics Team</h2>
-                <p>Excellence on and off the field. Building champions, creating leaders.</p>
+                <h1></h1>
+                <h2></h2>
+                <p></p>
                 <a href="#" class="cta-button" onclick="showSection('contact')" aria-label="Join the team">Join the Team</a>
+                <button class="edit-button" onclick="editHomeMain()">Edit</button>
             </div>
+            <form id="homeMainEditForm" class="edit-form">
+                <input type="text" id="homeTitle" placeholder="Title">
+                <input type="text" id="homeSubtitle" placeholder="Subtitle">
+                <textarea id="homeParagraph" placeholder="Paragraph"></textarea>
+                <button type="submit">Save</button>
+            </form>
             
             <!-- Hero Stats -->
-            <div class="hero-stats">
-                <div class="stat-card training-update-card">
-                    <div class="stat-number" style="font-size: 2rem; color: #650303e0;">Training Update</div>
-                    <div class="stat-label">📍 School Field</div>
-                    <div class="stat-label">🗓 9th October 2025</div>
-                    <div class="stat-label">🕟 4:30 PM</div>
-                    <div class="stat-label" style="color: #581a1a;">Note: Lateness won't be tolerated</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">Next Match</div>
-                    <div class="stat-label">Opponent: Criminology Department</div>
-                    <div class="stat-label">🗓 10th October 2025</div>
-                    <div class="stat-label">🕙 10:00 AM</div>
-                    <div class="stat-label">📍 School Field</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Matches Won</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Trophies</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2025/2026</div>
-                    <div class="stat-label">Season</div>
-                </div>
+            <div class="hero-stats" id="heroStats">
+                <!-- Generated by JS -->
             </div>
+            <button class="edit-button" onclick="editHomeStats()">Edit Stats</button>
+            <form id="homeStatsEditForm" class="edit-form">
+                <textarea id="homeStatsJson" placeholder="JSON for stats"></textarea>
+                <button type="submit">Save</button>
+            </form>
             
             <!-- Featured Players -->
-            <div class="featured-players">
+            <div class="featured-players" id="featuredPlayers">
                 <h3>Featured Players</h3>
                 <div class="featured-grid">
-                    <div class="featured-player">
-                        <img src=".jpeg" alt="Featured Player 1" loading="lazy">
-                        <div class="featured-info">
-                            <h4>TBD</h4>
-                            <p>Top Scorer</p>
-                        </div>
-                    </div>
-                    <div class="featured-player">
-                        <img src="cap.jpeg" alt="Featured Player 2" loading="lazy">
-                        <div class="featured-info">
-                            <h4>Fabunmi Ayodeji</h4>
-                            <p>Team Captain</p>
-                        </div>
-                    </div>
-                    <div class="featured-player">
-                        <img src=".jpeg" alt="Featured Player 3" loading="lazy">
-                        <div class="featured-info">
-                            <h4>TBD</h4>
-                            <p>Defensive Rock</p>
-                        </div>
-                    </div>
+                    <!-- Generated by JS -->
                 </div>
             </div>
+            <button class="edit-button" onclick="editFeaturedPlayers()">Edit Featured</button>
+            <form id="featuredEditForm" class="edit-form">
+                <textarea id="featuredJson" placeholder="JSON for featured players"></textarea>
+                <button type="submit">Save</button>
+            </form>
             
             <!-- Quick Links -->
-            <div class="quick-links">
-                <div class="quick-link-card">
-                    <i class="fas fa-trophy"></i>
-                    <h4>Latest Trophy</h4>
-                    <p>TBD</p>
-                </div>
-                <div class="quick-link-card">
-                    <i class="fas fa-users"></i>
-                    <h4>Team Size</h4>
-                    <p>20 Players + Coach</p>
-                </div>
+            <div class="quick-links" id="quickLinks">
+                <!-- Generated by JS -->
             </div>
+            <button class="edit-button" onclick="editQuickLinks()">Edit Quick Links</button>
+            <form id="quickLinksEditForm" class="edit-form">
+                <textarea id="quickLinksJson" placeholder="JSON for quick links"></textarea>
+                <button type="submit">Save</button>
+            </form>
         </div>
         
         <div class="scroll-indicator" aria-hidden="true">
@@ -1567,49 +1686,14 @@
         <div class="section-header">
             <h2 id="fixtures-header">Upcoming Fixtures</h2>
             <p>Don't miss our upcoming matches</p>
+            <button class="edit-button" onclick="editFixtures()">Edit</button>
         </div>
-        <div class="fixtures-table">
-            <table style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Competition</th>
-                        <th>Opponent</th>
-                        <th>Venue</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>OCT 10, 2025</td>
-                        <td>Friendly Match</td>
-                        <td>Criminology Department</td>
-                        <td>School Field</td>
-                        <td>10:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>Dec 15, 2025</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                    </tr>
-                    <tr>
-                        <td>Dec 15, 2025</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                    </tr>
-                    <tr>
-                        <td>Dec 15, 2025</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                        <td>TBD</td>
-                    </tr>
-                </tbody>
-            </table>
+        <form id="fixturesEditForm" class="edit-form">
+            <textarea id="fixturesJson" placeholder="JSON for fixtures"></textarea>
+            <button type="submit">Save</button>
+        </form>
+        <div class="fixtures-table" id="fixturesTable">
+            <!-- Generated by JS -->
         </div>
     </section>
 
@@ -1618,7 +1702,12 @@
         <div class="section-header">
             <h2 id="lineup-header">Team Lineup</h2>
             <p>Starting XI and Substitutes for the Upcoming Match</p>
+            <button class="edit-button" onclick="editLineup()">Edit</button>
         </div>
+        <form id="lineupEditForm" class="edit-form">
+            <textarea id="lineupJson" placeholder="JSON for lineup"></textarea>
+            <button type="submit">Save</button>
+        </form>
         <div class="lineup-container">
             <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 1.5rem;">Starting XI</h3>
             <div class="lineup-list" id="startingLineup">
@@ -1636,31 +1725,14 @@
         <div class="section-header">
             <h2 id="updates-header">Team Updates</h2>
             <p>Latest news and announcements</p>
+            <button class="edit-button" onclick="editUpdates()">Edit</button>
         </div>
-        <div class="updates-container">
-            <div class="update-item">
-                <div class="update-date">October 10, 2025</div>
-                <div class="update-title">Match</div>
-                <p>⚽ FRIENDLY MATCH 🔥</p>
-                <p>Linguistics Dept vs Criminology Dept</p>
-                <p>📍 School Field</p>
-                <p>🗓 Friday, Oct 10 | 🕟 10:00 AM</p>
-                <p>Bragging rights on the line. Let’s make the team proud! 💪⚽</p>
-            </div>
-            <div class="update-item">
-                <div class="update-date">TBD, 2025</div>
-                <div class="update-title">New Player Recruitment</div>
-                <p>Will be announced soon...</p>
-            </div>
-            <div class="update-item">
-                <div class="update-date">October 9, 2025</div>
-                <div class="update-title">Training Schedule Update</div>
-                <p>⚽ Match Prep Training</p>
-                <p>🗓 Wed, Oct 9</p>
-                <p>🕟 4:30 PM</p>
-                <p>📍 School Field</p>
-                <p>Match is on Friday — let’s train hard and get ready to win! 💯</p>
-            </div>
+        <form id="updatesEditForm" class="edit-form">
+            <textarea id="updatesJson" placeholder="JSON for updates"></textarea>
+            <button type="submit">Save</button>
+        </form>
+        <div class="updates-container" id="updatesContainer">
+            <!-- Generated by JS -->
         </div>
     </section>
 
@@ -1690,10 +1762,7 @@
                 <img src="gall3.jpeg" alt="Team photo" loading="lazy">
             </div>
             <div class="video-container">
-                <video controls>
-                    <source src="https://www.youtube.com/embed/0wq-AqAv1Ps?si=zTTAYLbWg42KwKF3" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/0wq-AqAv1Ps?si=zTTAYLbWg42KwKF3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </section>
@@ -1737,6 +1806,28 @@
         </div>
     </section>
 
+    <!-- Attendance Section -->
+    <section id="attendance" class="section" aria-labelledby="attendance-header">
+        <div class="section-header">
+            <h2 id="attendance-header">Team Attendance</h2>
+            <p>Track daily training attendance to promote discipline</p>
+        </div>
+        <div class="attendance-container">
+            <p id="currentDate">Date: Loading...</p>
+            <button class="admin-button" onclick="adminLogin()">Admin Login to Mark Attendance</button>
+            <form id="attendanceForm" class="attendance-form">
+                <h3>Select Players Who Attended Today</h3>
+                <div id="playerCheckboxes"></div>
+                <button type="submit" class="submit-button">Mark Attendance</button>
+            </form>
+            <div id="attendanceStatus"></div>
+            <div id="historicalAttendance">
+                <h3>Historical Attendance Records</h3>
+                <!-- Records will be generated here -->
+            </div>
+        </div>
+    </section>
+
     <!-- Player Modal -->
     <div id="playerModal" class="modal">
         <div class="modal-content">
@@ -1759,33 +1850,150 @@
     </footer>
 
     <script>
-        // Player data
-        const players = [
-            { name: "Fabunmi Ayodeji Damilare", nickname: "Captain", level: "200L", image: "cap.jpeg", position: "Forward", jersey: 11, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Owolabi Olamilekan Remilekun", nickname: "Lekan", level: "200L", image: "lekan.jpeg", position: "Striker", jersey: 9, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Adeyemi Elijah Mayowa", nickname: "Mayowa", level: "200L", image: "https://ui-avatars.com/api/?name=Adeyemi+Mayowa&background=f59e0b&color=fff&size=200", position: "Defender", jersey: 4, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Ajayi David Olamide", nickname: "David", level: "200L", image: "david.jpeg", position: "Right Back", jersey: 2, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Dahunsi Ogooluwa Ebenezer", nickname: "Ogo", level: "200L", image: "ogo.jpeg", position: "Right Back", jersey: 4, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Oluwatunmise Samuel Ayomiposi", nickname: "Tunmise", level: "200L", image: "https://ui-avatars.com/api/?name=Oluwatunmise+Tunmise&background=f59e0b&color=fff+&size=200", position: "Midfielder", jersey: 6, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Olaniyi Joseph Olamilekan", nickname: "Joseph", level: "200L", image: "ola.jpeg", position: "Defender", jersey: 3, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0},
-            { name: "Afolabi Oluwatosin Oluwagbenga", nickname: "Big Fish", level: "200L", image: "big.jpeg", position: "Midfielder", jersey: 10, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Ayeni Oreoluwa Greatgrace", nickname: "ALONI", level: "200L", image: "aloni.jpeg", position: "Right Back", jersey: 20, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Adeosebikan Segun Abayomi", nickname: "Segun", level: "200L", image: "https://ui-avatars.com/api/?name=Adeosebikan+Segun&background=1e3a8a&color=fff&size=200", position: "Defender", jersey: 8, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Ikuomola Daniel", nickname: "Daniel", level: "200L", image: "daniel.jpeg", position: "Defender", jersey: 5, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Badru Oluwatumininu", nickname: "Tumininu", level: "200L", image: "badru.jpg", position: "Midfielder", jersey: 13, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Latef Fawas Morenikeji", nickname: "Fawas", level: "200L", image: "https://ui-avatars.com/api/?name=Latef+Fawas&background=1e3a8a&color=fff&size=200", position: "Defender", jersey: 14, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Megbowon Iwabiolorun", nickname: "COOK", level: "200L", image: "cook.jpeg", position: "Right Winger", jersey: 7, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Iheanacho Daniel", nickname: "Iheanacho", level: "200L", image: "iheanacho.jpeg", position: "Midfielder", jersey: 15, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Godwin Samuel Erikefee", nickname: "ALPHA", level: "200L", image: "alpha.jpeg", position: "Midfielder", jersey: 16, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Adedeji Adedolapo Daniel", nickname: "Dolapo", level: "200L", image: "https://ui-avatars.com/api/?name=Adedeji+Dolapo&background=3b82f6&color=fff&size=200", position: "Forward", jersey: 17, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Salau Abdulramon Tobiloba", nickname: "Tobi", level: "200L", image: "tobi.jpg", position: "Midfielder", jersey: 8, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Tiamiyu Abdulsalam Adedayo", nickname: "SMONEY", level: "200L", image: "TSA.jpeg", position: "Goalkeeper", jersey: 1, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Adeyinka Paul Adeboye", nickname: "Paul", level: "200L", image: "paul.jpeg", position: "Goalkeeper", jersey: 12, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 },
-            { name: "Coach Name", nickname: "Coach", level: "Manager", image: "https://ui-avatars.com/api/?name=Coach&background=f59e0b&color=fff&size=200", position: "Manager", jersey: 0, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0 }
+        const adminPassword = 'nallsadmin';
+
+        // Home content data
+        let homeContent = {
+            main: {
+                title: 'NALLS 200LVL',
+                subtitle: '200lvl Linguistics Team',
+                paragraph: 'Excellence on and off the field. Building champions, creating leaders.'
+            },
+            stats: [
+                {
+                    class: 'training-update-card',
+                    number: 'Training Update',
+                    labels: [
+                        '📍 School Field',
+                        '🗓 TBD 2025',
+                        '🕟 TBD',
+                        'Note: Lateness won\'t be tolerated'
+                    ],
+                    numberStyle: 'font-size: 2rem; color: #650303e0;',
+                    labelStyle: ['','', '', 'color: #581a1a;']
+                },
+                {
+                    class: '',
+                    number: 'Next Match',
+                    labels: [
+                        'Opponent: TBD',
+                        '🗓 TBD 2025',
+                        '🕙 TBD',
+                        '📍 School Field'
+                    ],
+                    numberStyle: '',
+                    labelStyle: ['', '', '', '']
+                },
+                {
+                    class: '',
+                    number: '0',
+                    labels: ['Matches Won'],
+                    numberStyle: '',
+                    labelStyle: ['']
+                },
+                {
+                    class: '',
+                    number: '0',
+                    labels: ['Trophies'],
+                    numberStyle: '',
+                    labelStyle: ['']
+                },
+                {
+                    class: '',
+                    number: '2025/2026',
+                    labels: ['Season'],
+                    numberStyle: '',
+                    labelStyle: ['']
+                }
+            ],
+            featured: [
+                {
+                    img: '.jpeg',
+                    alt: 'Featured Player 1',
+                    name: 'TBD',
+                    role: 'Top Scorer'
+                },
+                {
+                    img: 'cap.jpeg',
+                    alt: 'Featured Player 2',
+                    name: 'Fabunmi Ayodeji',
+                    role: 'Team Captain'
+                },
+                {
+                    img: '.jpeg',
+                    alt: 'Featured Player 3',
+                    name: 'TBD',
+                    role: 'Defensive Rock'
+                }
+            ],
+            quick: [
+                {
+                    icon: 'fa-trophy',
+                    title: 'Latest Trophy',
+                    desc: 'TBD'
+                },
+                {
+                    icon: 'fa-users',
+                    title: 'Team Size',
+                    desc: '20 Players + Coach'
+                }
+            ]
+        };
+
+        // Fixtures data
+        let fixtures = [
+            { date: 'TBD, 2025', competition: 'TBD', opponent: 'TBD', venue: 'School Field', time: 'TBD' },
+            { date: 'Dec 15, 2025', competition: 'TBD', opponent: 'TBD', venue: 'TBD', time: 'TBD' },
+            { date: 'Dec 15, 2025', competition: 'TBD', opponent: 'TBD', venue: 'TBD', time: 'TBD' },
+            { date: 'Dec 15, 2025', competition: 'TBD', opponent: 'TBD', venue: 'TBD', time: 'TBD' }
         ];
 
-        // Team lineup data for the upcoming match
-        const lineup = {
+        // Updates data
+        let updates = [
+            {
+                date: 'TBD 2025',
+                title: 'Match',
+                content: `<p>⚽ FRIENDLY MATCH 🔥</p><p>Linguistics Dept vs TBD</p><p>📍 School Field</p><p>🗓 TBD | 🕟 TBD</p><p>Bragging rights on the line. Let’s make the team proud! 💪⚽</p>`
+            },
+            {
+                date: 'TBD, 2025',
+                title: 'New Player Recruitment',
+                content: `<p>Will be announced soon...</p>`
+            },
+            {
+                date: 'TBD, 2025',
+                title: 'Training Schedule Update',
+                content: `<p>⚽ Match Prep Training</p><p>🗓 TBD</p><p>🕟TBD</p><p>📍 School Field</p><p>Match is on Friday — let’s train hard and get ready to win! 💯</p>`
+            }
+        ];
+
+        // Player data
+        let players = [
+            { id: 1, name: "Fabunmi Ayodeji Damilare", nickname: "Captain", level: "200L", image: "cap.jpeg", position: "Forward", jersey: 11, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 2, name: "Owolabi Olamilekan Remilekun", nickname: "Lekan", level: "200L", image: "lekan.jpeg", position: "Striker", jersey: 9, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 3, name: "Adeyemi Elijah Mayowa", nickname: "Mayowa", level: "200L", image: "https://ui-avatars.com/api/?name=Adeyemi+Mayowa&background=f59e0b&color=fff&size=200", position: "Defender", jersey: 4, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 4, name: "Ajayi David Olamide", nickname: "David", level: "200L", image: "david.jpeg", position: "Right Back", jersey: 2, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 5, name: "Dahunsi Ogooluwa Ebenezer", nickname: "Ogo", level: "200L", image: "ogo.jpeg", position: "Right Back", jersey: 4, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 6, name: "Oluwatunmise Samuel Ayomiposi", nickname: "Tunmise", level: "200L", image: "https://ui-avatars.com/api/?name=Oluwatunmise+Tunmise&background=f59e0b&color=fff+&size=200", position: "Midfielder", jersey: 6, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 7, name: "Olaniyi Joseph Olamilekan", nickname: "Joseph", level: "200L", image: "ola.jpeg", position: "Defender", jersey: 3, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 8, name: "Afolabi Oluwatosin Oluwagbenga", nickname: "Big Fish", level: "200L", image: "big.jpeg", position: "Midfielder", jersey: 10, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 9, name: "Ayeni Oreoluwa Greatgrace", nickname: "ALONI", level: "200L", image: "aloni.jpeg", position: "Right Back", jersey: 20, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 10, name: "Adeosebikan Segun Abayomi", nickname: "Segun", level: "200L", image: "https://ui-avatars.com/api/?name=Adeosebikan+Segun&background=1e3a8a&color=fff&size=200", position: "Defender", jersey: 8, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 11, name: "Ikuomola Daniel", nickname: "Daniel", level: "200L", image: "daniel.jpeg", position: "Defender", jersey: 5, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 12, name: "Badru Oluwatumininu", nickname: "Tumininu", level: "200L", image: "badru.jpg", position: "Midfielder", jersey: 13, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 13, name: "Latef Fawas Morenikeji", nickname: "Fawas", level: "200L", image: "https://ui-avatars.com/api/?name=Latef+Fawas&background=1e3a8a&color=fff&size=200", position: "Defender", jersey: 14, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 14, name: "Megbowon Iwabiolorun", nickname: "COOK", level: "200L", image: "cook.jpeg", position: "Right Winger", jersey: 7, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 15, name: "Iheanacho Daniel", nickname: "Iheanacho", level: "200L", image: "iheanacho.jpeg", position: "Midfielder", jersey: 15, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 16, name: "Godwin Samuel Erikefee", nickname: "ALPHA", level: "200L", image: "alpha.jpeg", position: "Midfielder", jersey: 16, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 17, name: "Adedeji Adedolapo Daniel", nickname: "Dolapo", level: "200L", image: "https://ui-avatars.com/api/?name=Adedeji+Dolapo&background=3b82f6&color=fff&size=200", position: "Forward", jersey: 17, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 18, name: "Salau Abdulramon Tobiloba", nickname: "Tobi", level: "200L", image: "tobi.jpg", position: "Midfielder", jersey: 8, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 19, name: "Tiamiyu Abdulsalam Adedayo", nickname: "SMONEY", level: "200L", image: "TSA.jpeg", position: "Goalkeeper", jersey: 1, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 20, name: "Adeyinka Paul Adeboye", nickname: "Paul", level: "200L", image: "paul.jpeg", position: "Goalkeeper", jersey: 12, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 },
+            { id: 21, name: "Coach Name", nickname: "Coach", level: "Manager", image: "https://ui-avatars.com/api/?name=Coach&background=f59e0b&color=fff&size=200", position: "Manager", jersey: 0, goals: 0, assists: 0, appearances: 0, yellowCards: 0, redCards: 0, attendance: 0 }
+        ];
+
+        // Lineup data
+        let lineup = {
             startingXI: [
                 { name: "TBD", position: "Goalkeeper", jersey: 1 },
                 { name: "TBD", position: "Right Back", jersey: 2 },
@@ -1808,9 +2016,473 @@
             ]
         };
 
-        // Generate player cards
+        // Load persisted data
+        function loadPersistedData() {
+            ['homeContent', 'fixtures', 'updates', 'players', 'lineup'].forEach(key => {
+                const stored = localStorage.getItem(key);
+                if (stored) {
+                    window[key] = JSON.parse(stored);
+                }
+            });
+        }
+
+        // Save data
+        function saveData(key) {
+            localStorage.setItem(key, JSON.stringify(window[key]));
+        }
+
+        // Generate home main text
+        function generateHomeMain() {
+            const main = homeContent.main;
+            const mainText = document.querySelector('.hero-main-text');
+            mainText.querySelector('h1').textContent = main.title;
+            mainText.querySelector('h2').textContent = main.subtitle;
+            mainText.querySelector('p').textContent = main.paragraph;
+        }
+
+        // Edit home main
+        function editHomeMain() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('homeMainEditForm');
+            document.getElementById('homeTitle').value = homeContent.main.title;
+            document.getElementById('homeSubtitle').value = homeContent.main.subtitle;
+            document.getElementById('homeParagraph').value = homeContent.main.paragraph;
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                homeContent.main.title = document.getElementById('homeTitle').value;
+                homeContent.main.subtitle = document.getElementById('homeSubtitle').value;
+                homeContent.main.paragraph = document.getElementById('homeParagraph').value;
+                saveData('homeContent');
+                generateHomeMain();
+                form.style.display = 'none';
+            };
+        }
+
+        // Generate home stats
+        function generateHomeStats() {
+            const statsDiv = document.getElementById('heroStats');
+            statsDiv.innerHTML = '';
+            homeContent.stats.forEach(stat => {
+                const card = document.createElement('div');
+                card.className = `stat-card ${stat.class || ''}`;
+                let html = `<div class="stat-number" style="${stat.numberStyle || ''}">${stat.number}</div>`;
+                stat.labels.forEach((label, i) => {
+                    html += `<div class="stat-label" style="${stat.labelStyle[i] || ''}">${label}</div>`;
+                });
+                card.innerHTML = html;
+                statsDiv.appendChild(card);
+            });
+        }
+
+        // Edit home stats
+        function editHomeStats() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('homeStatsEditForm');
+            document.getElementById('homeStatsJson').value = JSON.stringify(homeContent.stats, null, 2);
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                try {
+                    homeContent.stats = JSON.parse(document.getElementById('homeStatsJson').value);
+                    saveData('homeContent');
+                    generateHomeStats();
+                } catch (err) {
+                    alert('Invalid JSON.');
+                }
+                form.style.display = 'none';
+            };
+        }
+
+        // Generate featured players
+        function generateFeaturedPlayers() {
+            const grid = document.querySelector('.featured-grid');
+            grid.innerHTML = '';
+            homeContent.featured.forEach(f => {
+                const player = document.createElement('div');
+                player.className = 'featured-player';
+                player.innerHTML = `
+                    <img src="${f.img}" alt="${f.alt}" loading="lazy">
+                    <div class="featured-info">
+                        <h4>${f.name}</h4>
+                        <p>${f.role}</p>
+                    </div>
+                `;
+                grid.appendChild(player);
+            });
+        }
+
+      // Edit featured players (with Firestore)
+async function editFeaturedPlayers() {
+    const password = prompt('Enter admin password:');
+    if (password !== adminPassword) {
+        alert('Incorrect password.');
+        return;
+    }
+
+    const form = document.getElementById('featuredEditForm');
+    document.getElementById('featuredJson').value = JSON.stringify(homeContent.featured, null, 2);
+    form.style.display = 'block';
+
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        try {
+            // Parse the updated JSON
+            homeContent.featured = JSON.parse(document.getElementById('featuredJson').value);
+
+            // 🔥 Save to Firestore instead of localStorage
+            const docRef = doc(db, "teamInfo", "ghVhEytxE9IgTV63qs1V");
+            await setDoc(docRef, { featured: homeContent.featured }, { merge: true });
+
+            alert('✅ Featured players updated successfully!');
+
+            generateFeaturedPlayers(); // Refresh the display
+        } catch (err) {
+            alert('Invalid JSON.');
+            console.error(err);
+        }
+
+        form.style.display = 'none';
+    };
+}
+        // Generate quick links
+        function generateQuickLinks() {
+            const links = document.getElementById('quickLinks');
+            links.innerHTML = '';
+            homeContent.quick.forEach(q => {
+                const card = document.createElement('div');
+                card.className = 'quick-link-card';
+                card.innerHTML = `
+                    <i class="fas ${q.icon}"></i>
+                    <h4>${q.title}</h4>
+                    <p>${q.desc}</p>
+                `;
+                links.appendChild(card);
+            });
+        }
+
+        // Edit quick links
+        function editQuickLinks() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('quickLinksEditForm');
+            document.getElementById('quickLinksJson').value = JSON.stringify(homeContent.quick, null, 2);
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                try {
+                    homeContent.quick = JSON.parse(document.getElementById('quickLinksJson').value);
+                    saveData('homeContent');
+                    generateQuickLinks();
+                } catch (err) {
+                    alert('Invalid JSON.');
+                }
+                form.style.display = 'none';
+            };
+        }
+
+        // Generate fixtures
+        function generateFixtures() {
+            const table = document.getElementById('fixturesTable');
+            let html = `<table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Competition</th>
+                            <th>Opponent</th>
+                            <th>Venue</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            fixtures.forEach(f => {
+                html += `
+                    <tr>
+                        <td>${f.date}</td>
+                        <td>${f.competition}</td>
+                        <td>${f.opponent}</td>
+                        <td>${f.venue}</td>
+                        <td>${f.time}</td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table>`;
+            table.innerHTML = html;
+        }
+
+        // Edit fixtures
+        function editFixtures() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('fixturesEditForm');
+            document.getElementById('fixturesJson').value = JSON.stringify(fixtures, null, 2);
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                try {
+                    fixtures = JSON.parse(document.getElementById('fixturesJson').value);
+                    saveData('fixtures');
+                    generateFixtures();
+                } catch (err) {
+                    alert('Invalid JSON.');
+                }
+                form.style.display = 'none';
+            };
+        }
+
+        // Generate updates
+        function generateUpdates() {
+            const container = document.getElementById('updatesContainer');
+            container.innerHTML = '';
+            updates.forEach(u => {
+                const item = document.createElement('div');
+                item.className = 'update-item';
+                item.innerHTML = `
+                    <div class="update-date">${u.date}</div>
+                    <div class="update-title">${u.title}</div>
+                    ${u.content}
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Edit updates
+        function editUpdates() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('updatesEditForm');
+            document.getElementById('updatesJson').value = JSON.stringify(updates, null, 2);
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                try {
+                    updates = JSON.parse(document.getElementById('updatesJson').value);
+                    saveData('updates');
+                    generateUpdates();
+                } catch (err) {
+                    alert('Invalid JSON.');
+                }
+                form.style.display = 'none';
+            };
+        }
+
+        // Generate lineup
+        function generateLineup() {
+            const starting = document.getElementById('startingLineup');
+            const subs = document.getElementById('substitutes');
+            starting.innerHTML = '';
+            subs.innerHTML = '';
+            lineup.startingXI.forEach(player => {
+                const item = document.createElement('div');
+                item.className = 'lineup-item';
+                item.innerHTML = `
+                    <div class="lineup-name">${player.name}</div>
+                    <div>
+                        <div class="lineup-position">${player.position}</div>
+                        <div class="lineup-jersey">Jersey #${player.jersey}</div>
+                    </div>
+                `;
+                item.onclick = () => {
+                    const pIndex = players.findIndex(p => p.nickname === player.name || p.name.includes(player.name));
+                    if (pIndex !== -1) openPlayerModal(pIndex);
+                };
+                starting.appendChild(item);
+            });
+            lineup.substitutes.forEach(player => {
+                const item = document.createElement('div');
+                item.className = 'lineup-item';
+                item.innerHTML = `
+                    <div class="lineup-name">${player.name}</div>
+                    <div>
+                        <div class="lineup-position">${player.position}</div>
+                        <div class="lineup-jersey">Jersey #${player.jersey}</div>
+                    </div>
+                `;
+                item.onclick = () => {
+                    const pIndex = players.findIndex(p => p.nickname === player.name || p.name.includes(player.name));
+                    if (pIndex !== -1) openPlayerModal(pIndex);
+                };
+                subs.appendChild(item);
+            });
+        }
+
+        // Edit lineup
+        function editLineup() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('lineupEditForm');
+            document.getElementById('lineupJson').value = JSON.stringify(lineup, null, 2);
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                try {
+                    lineup = JSON.parse(document.getElementById('lineupJson').value);
+                    saveData('lineup');
+                    generateLineup();
+                } catch (err) {
+                    alert('Invalid JSON.');
+                }
+                form.style.display = 'none';
+            };
+        }
+
+        // Attendance functions
+        function getTodayDate() {
+            const today = new Date();
+            return today.toISOString().split('T')[0];
+        }
+
+        function getCurrentTimestamp() {
+            return new Date().toLocaleString();
+        }
+
+        function adminLogin() {
+            const password = prompt('Enter admin password to mark attendance:');
+            if (password === adminPassword) {  
+                document.getElementById('attendanceForm').style.display = 'block';
+                loadPlayerCheckboxes();
+            } else {
+                alert('Incorrect password. Only admin can mark attendance.');
+            }
+        }
+
+        function loadPlayerCheckboxes() {
+            const container = document.getElementById('playerCheckboxes');
+            container.innerHTML = '';
+            players.forEach(player => {
+                if (player.position !== 'Manager') {  
+                    const div = document.createElement('div');
+                    div.className = 'player-checkbox';
+                    div.innerHTML = `
+                        <input type="checkbox" id="player-${player.id}" value="${player.id}">
+                        <label for="player-${player.id}">${player.name} (${player.nickname})</label>
+                    `;
+                    container.appendChild(div);
+                }
+            });
+        }
+
+        document.getElementById('attendanceForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const today = getTodayDate();
+            let attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+
+            if (attendanceData[today]) {
+                document.getElementById('attendanceStatus').textContent = 'Attendance already marked for today. Cannot edit.';
+                return;
+            }
+
+            const attendedIds = Array.from(document.querySelectorAll('#playerCheckboxes input:checked')).map(input => parseInt(input.value));
+
+            attendanceData[today] = {
+                timestamp: getCurrentTimestamp(),
+                attended: attendedIds
+            };
+            localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+
+            attendedIds.forEach(id => {
+                const player = players.find(p => p.id === id);
+                if (player) {
+                    player.attendance++;
+                }
+            });
+            saveData('players');
+
+            document.getElementById('attendanceStatus').textContent = 'Attendance marked successfully and locked for today.';
+            document.getElementById('attendanceForm').style.display = 'none';
+            displayHistoricalAttendance();
+        });
+
+        function deleteAttendance(date) {
+            const password = prompt('Enter admin password to delete this record:');
+            if (password === adminPassword) {
+                let attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+                const record = attendanceData[date];
+                if (record) {
+                    record.attended.forEach(id => {
+                        const player = players.find(p => p.id === id);
+                        if (player) {
+                            player.attendance = Math.max(0, player.attendance - 1);
+                        }
+                    });
+                    saveData('players');
+
+                    delete attendanceData[date];
+                    localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+                    displayHistoricalAttendance();
+                    alert('Record deleted successfully.');
+                }
+            } else {
+                alert('Incorrect password. Deletion cancelled.');
+            }
+        }
+
+        function displayHistoricalAttendance() {
+            const container = document.getElementById('historicalAttendance');
+            container.innerHTML = '<h3>Historical Attendance Records</h3>';
+            const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+            const dates = Object.keys(attendanceData).sort((a, b) => new Date(b) - new Date(a)); // Newest first
+
+            dates.forEach(date => {
+                const record = attendanceData[date];
+                const div = document.createElement('div');
+                div.className = 'attendance-record';
+                let playerList = '<ul>';
+                record.attended.forEach(id => {
+                    const player = players.find(p => p.id === id);
+                    if (player) {
+                        playerList += `<li>${player.name} (${player.nickname})</li>`;
+                    }
+                });
+                playerList += '</ul>';
+
+                div.innerHTML = `
+                    <h4>Date: ${date} (Marked at: ${record.timestamp})</h4>
+                    ${playerList}
+                    <button class="delete-button" onclick="deleteAttendance('${date}')">Delete</button>
+                `;
+                container.appendChild(div);
+            });
+
+            if (dates.length === 0) {
+                container.innerHTML += '<p>No attendance records yet.</p>';
+            }
+        }
+
+        function checkAttendanceStatus() {
+            const today = getTodayDate();
+            document.getElementById('currentDate').textContent = `Date: ${today}`;
+            const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+            if (attendanceData[today]) {
+                document.getElementById('attendanceStatus').textContent = 'Attendance already marked for today. Cannot edit.';
+            }
+            displayHistoricalAttendance();
+            return 'Current date: ' + today;
+        }
+
         function generatePlayerCards() {
             const playersGrid = document.querySelector('.players-grid');
+            playersGrid.innerHTML = '';
             players.forEach((player, index) => {
                 const playerCard = document.createElement('div');
                 playerCard.className = 'player-card';
@@ -1830,46 +2502,67 @@
             });
         }
 
-        // Generate lineup list
-        function generateLineupCards() {
-            const startingLineupList = document.getElementById('startingLineup');
-            const substitutesList = document.getElementById('substitutes');
-
-            // Generate Starting XI
-            lineup.startingXI.forEach((player, index) => {
-                const lineupItem = document.createElement('div');
-                lineupItem.className = 'lineup-item';
-                lineupItem.setAttribute('aria-label', `Player: ${player.name}`);
-                lineupItem.onclick = () => openPlayerModal(players.findIndex(p => p.nickname === player.name || p.name.includes(player.name)));
-                
-                lineupItem.innerHTML = `
+        // Generate lineup
+        function generateLineup() {
+            const starting = document.getElementById('startingLineup');
+            const subs = document.getElementById('substitutes');
+            starting.innerHTML = '';
+            subs.innerHTML = '';
+            lineup.startingXI.forEach(player => {
+                const item = document.createElement('div');
+                item.className = 'lineup-item';
+                item.innerHTML = `
                     <div class="lineup-name">${player.name}</div>
                     <div>
                         <div class="lineup-position">${player.position}</div>
                         <div class="lineup-jersey">Jersey #${player.jersey}</div>
                     </div>
                 `;
-                
-                startingLineupList.appendChild(lineupItem);
+                item.onclick = () => {
+                    const pIndex = players.findIndex(p => p.nickname === player.name || p.name.includes(player.name));
+                    if (pIndex !== -1) openPlayerModal(pIndex);
+                };
+                starting.appendChild(item);
             });
-
-            // Generate Substitutes
-            lineup.substitutes.forEach((player, index) => {
-                const lineupItem = document.createElement('div');
-                lineupItem.className = 'lineup-item';
-                lineupItem.setAttribute('aria-label', `Player: ${player.name}`);
-                lineupItem.onclick = () => openPlayerModal(players.findIndex(p => p.nickname === player.name || p.name.includes(player.name)));
-                
-                lineupItem.innerHTML = `
+            lineup.substitutes.forEach(player => {
+                const item = document.createElement('div');
+                item.className = 'lineup-item';
+                item.innerHTML = `
                     <div class="lineup-name">${player.name}</div>
                     <div>
                         <div class="lineup-position">${player.position}</div>
                         <div class="lineup-jersey">Jersey #${player.jersey}</div>
                     </div>
                 `;
-                
-                substitutesList.appendChild(lineupItem);
+                item.onclick = () => {
+                    const pIndex = players.findIndex(p => p.nickname === player.name || p.name.includes(player.name));
+                    if (pIndex !== -1) openPlayerModal(pIndex);
+                };
+                subs.appendChild(item);
             });
+        }
+
+        // Edit lineup
+        function editLineup() {
+            const password = prompt('Enter admin password:');
+            if (password !== adminPassword) {
+                alert('Incorrect password.');
+                return;
+            }
+            const form = document.getElementById('lineupEditForm');
+            document.getElementById('lineupJson').value = JSON.stringify(lineup, null, 2);
+            form.style.display = 'block';
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                try {
+                    lineup = JSON.parse(document.getElementById('lineupJson').value);
+                    saveData('lineup');
+                    generateLineup();
+                } catch (err) {
+                    alert('Invalid JSON.');
+                }
+                form.style.display = 'none';
+            };
         }
 
         // Show/hide sections
@@ -1882,6 +2575,23 @@
             const targetSection = document.getElementById(sectionId);
             targetSection.classList.add('active');
             targetSection.style.display = 'block';
+
+            if (sectionId === 'attendance') {
+                checkAttendanceStatus();
+            } else if (sectionId === 'home') {
+                generateHomeMain();
+                generateHomeStats();
+                generateFeaturedPlayers();
+                generateQuickLinks();
+            } else if (sectionId === 'fixtures') {
+                generateFixtures();
+            } else if (sectionId === 'updates') {
+                generateUpdates();
+            } else if (sectionId === 'players') {
+                generatePlayerCards();
+            } else if (sectionId === 'lineup') {
+                generateLineup();
+            }
         }
 
         // Initialize sections on page load
@@ -1893,7 +2603,7 @@
             });
         }
 
-        // Player modal
+        // Player modal with attendance and edit
         function openPlayerModal(playerIndex) {
             const player = players[playerIndex];
             const modal = document.getElementById('playerModal');
@@ -1907,7 +2617,7 @@
                     <p style="color: var(--text-dark); font-weight: 600; margin-bottom: 0.5rem;">${player.level} - ${player.position}</p>
                     ${player.jersey > 0 ? `<p style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">Jersey #${player.jersey}</p>` : ''}
                 </div>
-                <div class="player-stats">
+                <div class="player-stats" id="playerStatsDisplay">
                     <div class="stat-item">
                         <div class="stat-value">${player.goals}</div>
                         <div class="stat-label">Goals</div>
@@ -1932,10 +2642,44 @@
                         <div class="stat-value">${player.position}</div>
                         <div class="stat-label">Position</div>
                     </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${player.attendance}</div>
+                        <div class="stat-label">Attendances</div>
+                    </div>
                 </div>
+                <button class="edit-button" onclick="editPlayerStats(${playerIndex})">Edit Stats</button>
+                <form id="playerEditForm" class="edit-form">
+                    <input type="number" id="goals" value="${player.goals}" placeholder="Goals">
+                    <input type="number" id="assists" value="${player.assists}" placeholder="Assists">
+                    <input type="number" id="appearances" value="${player.appearances}" placeholder="Appearances">
+                    <input type="number" id="yellowCards" value="${player.yellowCards}" placeholder="Yellow Cards">
+                    <input type="number" id="redCards" value="${player.redCards}" placeholder="Red Cards">
+                    <button type="submit">Save</button>
+                </form>
             `;
             
             modal.style.display = 'block';
+
+            document.getElementById('playerEditForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const password = prompt('Enter admin password:');
+                if (password !== adminPassword) {
+                    alert('Incorrect password.');
+                    return;
+                }
+                players[playerIndex].goals = parseInt(document.getElementById('goals').value) || 0;
+                players[playerIndex].assists = parseInt(document.getElementById('assists').value) || 0;
+                players[playerIndex].appearances = parseInt(document.getElementById('appearances').value) || 0;
+                players[playerIndex].yellowCards = parseInt(document.getElementById('yellowCards').value) || 0;
+                players[playerIndex].redCards = parseInt(document.getElementById('redCards').value) || 0;
+                saveData('players');
+                closeModal();
+                openPlayerModal(playerIndex); // Reopen to show updates
+            });
+        }
+
+        function editPlayerStats(index) {
+            document.getElementById('playerEditForm').style.display = 'block';
         }
 
         function closeModal() {
@@ -1978,9 +2722,17 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            loadPersistedData();
             initializeSections();
+            generateHomeMain();
+            generateHomeStats();
+            generateFeaturedPlayers();
+            generateQuickLinks();
             generatePlayerCards();
-            generateLineupCards();
+            generateFixtures();
+            generateUpdates();
+            generateLineup();
+            checkAttendanceStatus();
 
             // Mobile menu toggle
             const mobileMenu = document.querySelector('.mobile-menu');
@@ -1996,18 +2748,116 @@
                 }
             });
 
-            // Smooth scroll for navigation links
-            document.querySelectorAll('.nav-links a, .hero-nav-links a, .mobile-nav-links a').forEach(link => {
+            // Navigation links
+            document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const onclick = this.getAttribute('onclick');
-                    if (onclick) {
-                        const targetId = onclick.match(/'([^']+)'/)[1];
-                        showSection(targetId);
+                    const targetId = this.getAttribute('onclick').match(/showSection\('([^']+)'\)/)[1];
+                    showSection(targetId);
+                    if (this.closest('.mobile-nav')) {
+                        closeMobileNav();
                     }
                 });
             });
         });
     </script>
+
+  <!-- ======================
+     FIREBASE CONNECTION
+======================= -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+  // 🔥 Replace with your real Firebase config
+  const firebaseConfig = {
+   apiKey: "AIzaSyAGyURqTBIHmhpZfKVjo5ekWXJZtXRJ40w",
+    authDomain: "linguistics-19a43.firebaseapp.com",
+    projectId: "linguistics-19a43",
+    storageBucket: "linguistics-19a43.firebasestorage.app",
+    messagingSenderId: "839507423613",
+    appId: "1:839507423613:web:bb55be8e5ab764a2789c14",
+    measurementId: "G-C4LTPLX1TN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 🔹 Load all site data from Firestore
+  async function loadSiteData() {
+    try {
+            const docRef = doc(db, "site", "config");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+  const data = docSnap.data();
+
+  // ✅ Load Firestore data into your global site variables (with safe defaults)
+  window.homeContent = data.homeContent || {};
+  window.fixtures = data.fixtures || [];
+  window.updates = data.updates || [];
+  window.players = data.players || [];
+  window.lineup = data.lineup || {};
+
+  console.log("✅ Loaded site data from Firestore:", data);
+
+  // 👇 Optionally, re-render the UI using your existing functions
+  if (typeof generateFeaturedPlayers === "function") generateFeaturedPlayers();
+  if (typeof generateFixtures === "function") generateFixtures();
+  if (typeof generateUpdates === "function") generateUpdates();
+
+        // Refresh UI after loading
+        generateHomeMain?.();
+        generateHomeStats?.();
+        generateFeaturedPlayers?.();
+        generateQuickLinks?.();
+        generatePlayerCards?.();
+        generateFixtures?.();
+        generateUpdates?.();
+        generateLineup?.();
+        checkAttendanceStatus?.();
+      } else {
+        console.log("⚠️ No site data in Firestore yet — using defaults");
+      }
+    } catch (error) {
+      console.error("🔥 Error loading site data:", error);
+    }
+  }
+
+  // 🔹 Save all data to Firestore
+  async function saveDataToFirestore() {
+    try {
+      const docRef = doc(db, "site", "config");
+      await setDoc(docRef, {
+        homeContent,
+        fixtures,
+        updates,
+        players,
+        lineup
+      }, { merge: true });
+      console.log("✅ Data saved to Firestore");
+    } catch (error) {
+      console.error("🔥 Error saving data:", error);
+      alert("❌ Failed to save data. Check console for details.");
+    }
+  }
+
+  // 🔹 Replace your local saveData() with this version
+  function saveData(key) {
+    // keep local backup
+    localStorage.setItem(key, JSON.stringify(window[key]));
+    // sync online
+    saveDataToFirestore();
+  }
+
+  // 🔹 When page loads, fetch data from Firestore first
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadSiteData();
+  });
+
+  // Expose saveDataToFirestore globally (for debugging or manual trigger)
+  window.saveDataToFirestore = saveDataToFirestore;
+</script>
+
 </body>
 </html>
