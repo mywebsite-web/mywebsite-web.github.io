@@ -1,0 +1,589 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Navigation Styles */
+.main-nav {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    gap: 4px;
+}
+
+.mobile-menu-btn span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.book-page-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 20px;
+    margin: 0 auto;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.book-page {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                0 0 0 2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    min-height: 90vh;
+}
+
+.book-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #3498db 0%, #2980b9 50%, #3498db 100%);
+}
+
+.page-content {
+    padding: 60px 50px;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(248, 249, 250, 1) 100%);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #e0e0e0;
+    position: relative;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.content-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+}
+
+.person-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #3498db;
+    margin-bottom: 25px;
+}
+
+.person-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.person-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #34495e;
+    text-align: justify;
+    margin-bottom: 18px;
+    text-indent: 25px;
+}
+
+.person-description:last-child {
+    margin-bottom: 0;
+}
+
+.mission-card {
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0f7ff 100%);
+    padding: 35px;
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mission-text {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: #34495e;
+    text-align: justify;
+    margin-bottom: 20px;
+    text-indent: 25px;
+}
+
+.mission-text.highlight {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-style: italic;
+    color: #2c3e50;
+    text-indent: 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.page-footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.navigation-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.nav-link:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.footer-note {
+    text-align: center;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #34495e;
+}
+
+.footer-note p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.signature {
+    font-style: italic;
+    color: #7f8c8d;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 60px;
+        flex-direction: column;
+        background: #2c3e50;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .book-page-container {
+        padding: 0 8px;
+    }
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) {
+    .page-content {
+        padding: 50px 40px;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Mobile styles - Book last page appearance */
+@media (max-width: 768px) {
+    /* Mobile Navigation - already defined above, just add book-page adjustments */
+    .book-page-container {
+        padding: 0 8px;
+    }
+    
+    body {
+        padding: 8px;
+    }
+    
+    .book-page {
+        border-radius: 8px;
+        min-height: calc(100vh - 16px);
+    }
+    
+    .page-content {
+        padding: 35px 25px;
+        min-height: calc(100vh - 16px);
+        gap: 30px;
+    }
+    
+    .page-header {
+        margin-bottom: 30px;
+        padding-bottom: 25px;
+    }
+    
+    .page-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+    
+    .page-number {
+        position: static;
+        display: block;
+        margin-top: 10px;
+        font-size: 0.85rem;
+    }
+    
+    .content-section {
+        gap: 30px;
+    }
+    
+    .section {
+        margin-bottom: 25px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
+    
+    .person-card {
+        padding: 22px 18px;
+        margin-bottom: 20px;
+    }
+    
+    .person-name {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .person-description {
+        font-size: 0.98rem;
+        line-height: 1.75;
+        text-indent: 20px;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .mission-card {
+        padding: 25px 20px;
+    }
+    
+    .mission-text {
+        font-size: 1rem;
+        line-height: 1.75;
+        text-indent: 20px;
+        margin-bottom: 18px;
+    }
+    
+    .mission-text.highlight {
+        font-size: 1.1rem;
+        padding: 18px 15px;
+        margin-top: 10px;
+    }
+    
+    .page-footer {
+        margin-top: 30px;
+        padding-top: 25px;
+    }
+    
+    .navigation-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+    }
+    
+    .footer-note {
+        padding: 20px 15px;
+    }
+    
+    .footer-note p {
+        font-size: 0.95rem;
+    }
+    
+    .signature {
+        font-size: 1rem;
+    }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .book-page {
+        border-radius: 6px;
+        min-height: calc(100vh - 10px);
+    }
+    
+    .page-content {
+        padding: 25px 18px;
+        min-height: calc(100vh - 10px);
+        gap: 25px;
+    }
+    
+    .page-header {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+    }
+    
+    .page-title {
+        font-size: 1.6rem;
+    }
+    
+    .page-number {
+        font-size: 0.8rem;
+    }
+    
+    .content-section {
+        gap: 25px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+    }
+    
+    .person-card {
+        padding: 18px 15px;
+        margin-bottom: 18px;
+    }
+    
+    .person-name {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .person-description {
+        font-size: 0.92rem;
+        text-indent: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .mission-card {
+        padding: 20px 15px;
+    }
+    
+    .mission-text {
+        font-size: 0.95rem;
+        text-indent: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .mission-text.highlight {
+        font-size: 1.05rem;
+        padding: 15px 12px;
+    }
+    
+    .page-footer {
+        margin-top: 25px;
+        padding-top: 20px;
+    }
+    
+    .footer-note {
+        padding: 18px 12px;
+    }
+    
+    .footer-note p {
+        font-size: 0.9rem;
+    }
+    
+    .signature {
+        font-size: 0.95rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .page-content {
+        padding: 20px 15px;
+    }
+    
+    .page-title {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .person-name {
+        font-size: 1.1rem;
+    }
+    
+    .person-description {
+        font-size: 0.9rem;
+        text-indent: 15px;
+    }
+    
+    .mission-text {
+        font-size: 0.9rem;
+        text-indent: 15px;
+    }
+}
+

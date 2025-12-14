@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistics Test - Exam Practice</title>
+    <link rel="stylesheet" href="test.css">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ukqbey8kb7");
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Linguistics Guide</a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home.html">Study Guide</a></li>
+                    <li><a href="resources.html">Study Resources</a></li>
+                    <li><a href="flashcards.html">Flashcards</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="test.html" class="active">Practice Test</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>Linguistics Practice Test</h1>
+                    <p class="subtitle">Test Your Knowledge</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="test-controls" id="testControls">
+            <div class="course-selector">
+                <label for="courseSelect">Select Course:</label>
+                <select id="courseSelect">
+                    <option value="">-- Select a Course --</option>
+                    <optgroup label="100 Level">
+                        <option value="LIN 101">LIN 101 - Introduction to Linguistics and Languages</option>
+                        <option value="LIN 103">LIN 103 - Introduction to Phonetics</option>
+                        <option value="LIN 105">LIN 105 - Elementary Grammar</option>
+                        <option value="LIN 107">LIN 107 - Languages of the World</option>
+                        <option value="LIN 109">LIN 109 - Advanced English Composition</option>
+                    </optgroup>
+                    <optgroup label="200 Level">
+                        <option value="LIN 201">LIN 201 - Introduction to Phonology</option>
+                        <option value="LIN 203">LIN 203 - Introduction to Morphology</option>
+                        <option value="LIN 205">LIN 205 - Comparative Historical Linguistics</option>
+                        <option value="LIN 207">LIN 207 - Writing System and Orthographic Design</option>
+                        <option value="LIN 209">LIN 209 - Linguistics and Broadcasting</option>
+                    </optgroup>
+                </select>
+                <button id="startTestBtn" onclick="startTest()">Start Test</button>
+            </div>
+        </div>
+
+        <div class="test-container" id="testContainer" style="display: none;">
+            <div class="test-header">
+                <div class="test-info">
+                    <h2 id="testCourseTitle"></h2>
+                    <p class="question-counter">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">30</span></p>
+                </div>
+                <div class="timer" id="timer">Time: 00:00</div>
+            </div>
+
+            <div class="question-container" id="questionContainer">
+                <!-- Questions will be dynamically added here -->
+            </div>
+
+            <div class="test-actions">
+                <button id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                <button id="nextBtn" onclick="nextQuestion()">Next</button>
+                <button id="submitBtn" onclick="submitTest()" style="display: none;">Submit Test</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="resultsContainer" style="display: none;">
+            <h2>Test Results</h2>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span id="scorePercentage">0</span>%
+                </div>
+                <p class="score-text">You scored <span id="scoreNumber">0</span> out of <span id="totalScore">30</span></p>
+            </div>
+
+            <div class="wrong-answers" id="wrongAnswers">
+                <h3>Review Your Mistakes</h3>
+                <!-- Wrong answers with explanations will be shown here -->
+            </div>
+
+            <div class="results-actions">
+                <button onclick="retakeTest()">Retake Test</button>
+                <button onclick="goHome()">Back to Home</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Developed by <strong>Fauz Dev</strong> and <b>SalamDev</b></p>
+            <a href="about.html" class="about-link-footer">About Us</a>
+        </footer>
+    </div>
+
+    <script src="questionBank.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>
+

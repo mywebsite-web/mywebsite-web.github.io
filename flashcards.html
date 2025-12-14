@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards - Linguistics Exam Preparation</title>
+    <link rel="stylesheet" href="flashcards.css">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ukqbey8kb7");
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Linguistics Guide</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Study Guide</a></li>
+                <li><a href="resources.html">Study Resources</a></li>
+                <li><a href="flashcards.html" class="active">Flashcards</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="test.html">Practice Test</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flashcards-container">
+        <header class="flashcards-header">
+            <h1>Interactive Flashcards</h1>
+            <p class="flashcards-subtitle">Click or tap on any card to flip and learn key linguistics terms</p>
+        </header>
+
+        <!-- Controls -->
+        <div class="flashcards-controls">
+            <button class="control-btn" id="shuffleBtn" aria-label="Shuffle flashcards">🔀 Shuffle</button>
+            <button class="control-btn" id="resetBtn" aria-label="Reset to first card">↻ Reset</button>
+            <div class="card-counter">
+                <span id="currentCard">1</span> / <span id="totalCards">20</span>
+            </div>
+        </div>
+
+        <!-- Flashcard Container -->
+        <div class="flashcard-wrapper">
+            <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flashcard - click to flip">
+                <div class="flashcard-inner" id="flashcardInner">
+                    <!-- Front of card -->
+                    <div class="flashcard-front">
+                        <div class="card-label">Term</div>
+                        <h2 class="card-term" id="cardTerm">Phonology</h2>
+                        <p class="card-hint">Click to flip</p>
+                    </div>
+                    <!-- Back of card -->
+                    <div class="flashcard-back">
+                        <div class="card-label">Definition</div>
+                        <p class="card-definition" id="cardDefinition">
+                            The branch of linguistics that studies how sounds function in a particular language, 
+                            focusing on sound patterns, organization, and rules.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flashcards-navigation">
+            <button class="nav-btn" id="prevBtn" aria-label="Previous card">← Previous</button>
+            <button class="nav-btn" id="nextBtn" aria-label="Next card">Next →</button>
+        </div>
+
+        <!-- Card List (Optional - shows all cards) -->
+        <section class="card-list-section">
+            <h2>All Flashcards</h2>
+            <p class="card-list-subtitle">Browse all terms or jump to a specific card</p>
+            <div class="card-list" id="cardList" role="list">
+                <!-- Cards will be dynamically generated here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>Developed by <strong>Fauz Dev</strong> and <b>SalamDev</b></p>
+        <p>&copy; 2024 Linguistics Exam Preparation Guide. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Flashcards -->
+    <script src="flashcards.js"></script>
+</body>
+</html>
+

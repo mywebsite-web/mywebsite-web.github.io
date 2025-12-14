@@ -1,0 +1,602 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.cover-container {
+    width: 100%;
+    max-width: 900px;
+    perspective: 1000px;
+}
+
+.cover-page {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                0 0 0 2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cover-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #3498db 0%, #2980b9 50%, #3498db 100%);
+}
+
+.cover-content {
+    padding: 60px 50px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(248, 249, 250, 1) 100%);
+}
+
+.cover-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    border-bottom: 3px solid #e0e0e0;
+}
+
+.main-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sub-title {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #34495e;
+    letter-spacing: 2px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.cover-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.author-section {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+}
+
+.author-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.author-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 0;
+}
+
+/* Collaboration Section - Sponsor Style */
+.collaboration-section {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.collaboration-label {
+    font-size: 0.7rem;
+    color: #95a5a6;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+}
+
+.collaboration-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #7f8c8d;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    margin: 0;
+}
+
+.description-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #34495e;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+.description-text.highlight {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    font-style: italic;
+    text-indent: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0f7ff 100%);
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+    margin-top: 10px;
+}
+
+.cover-footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+    border-top: 2px solid #e0e0e0;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.developer-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.developer-name {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.developer-name strong {
+    color: #3498db;
+    font-weight: 700;
+}
+
+.developer-name b {
+    color: #27ae60;
+    font-weight: 700;
+}
+
+.enter-button-container {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.cover-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.about-link-cover {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+    padding: 10px 25px;
+    border-radius: 6px;
+    background: rgba(52, 152, 219, 0.1);
+    border: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+.about-link-cover:hover {
+    color: #2980b9;
+    background: rgba(52, 152, 219, 0.15);
+    border-color: rgba(52, 152, 219, 0.5);
+    transform: translateY(-2px);
+}
+
+.enter-button {
+    display: inline-block;
+    padding: 18px 50px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+}
+
+.enter-button:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #1f6391 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+    border-color: #3498db;
+}
+
+.enter-button:active {
+    transform: translateY(-1px);
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) {
+    .cover-content {
+        padding: 50px 40px;
+    }
+    
+    .main-title {
+        font-size: 3.5rem;
+    }
+    
+    .sub-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Mobile styles - Book-like appearance */
+@media (max-width: 768px) {
+    body {
+        padding: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .cover-container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .cover-page {
+        border-radius: 8px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
+                    0 0 0 1px rgba(0, 0, 0, 0.1),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        min-height: calc(100vh - 16px);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .cover-content {
+        padding: 35px 25px;
+        min-height: calc(100vh - 16px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 25px;
+    }
+    
+    .cover-header {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: 2px solid #e0e0e0;
+        flex-shrink: 0;
+    }
+    
+    .main-title {
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+        line-height: 1.15;
+        margin-bottom: 12px;
+        word-break: break-word;
+    }
+    
+    .sub-title {
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+        line-height: 1.3;
+    }
+    
+    .cover-body {
+        gap: 25px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .author-section {
+        padding: 18px 15px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+    
+    .author-label {
+        font-size: 0.85rem;
+    }
+    
+    .author-name {
+        font-size: 1.15rem;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+    
+    .collaboration-section {
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    .collaboration-label {
+        font-size: 0.65rem;
+    }
+    
+    .collaboration-name {
+        font-size: 0.85rem;
+    }
+
+    .description-section {
+        padding: 22px 18px;
+        gap: 18px;
+        border-radius: 6px;
+        flex: 1;
+    }
+    
+    .description-text {
+        font-size: 0.98rem;
+        text-indent: 20px;
+        line-height: 1.75;
+        text-align: justify;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .description-text.highlight {
+        font-size: 1.05rem;
+        padding: 18px 15px;
+        line-height: 1.6;
+        text-indent: 0;
+        margin-top: 5px;
+    }
+    
+    .cover-footer {
+        padding: 22px 15px;
+        margin-top: 20px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+    
+    .developer-label {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+    
+    .developer-name {
+        font-size: 1.05rem;
+        line-height: 1.5;
+    }
+    
+    .enter-button-container {
+        margin-top: 25px;
+        padding-top: 20px;
+        flex-shrink: 0;
+    }
+    
+    .enter-button {
+        padding: 16px 35px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 100%;
+        letter-spacing: 0.5px;
+        border-radius: 6px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .about-link-cover {
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+    }
+}
+
+/* Small mobile styles - Optimized book cover */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .cover-page {
+        border-radius: 6px;
+        min-height: calc(100vh - 10px);
+    }
+    
+    .cover-content {
+        padding: 25px 18px;
+        min-height: calc(100vh - 10px);
+        gap: 20px;
+    }
+    
+    .cover-header {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .main-title {
+        font-size: 2.2rem;
+        letter-spacing: 1.5px;
+        line-height: 1.1;
+        margin-bottom: 10px;
+    }
+    
+    .sub-title {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        line-height: 1.25;
+    }
+    
+    .cover-body {
+        gap: 20px;
+    }
+    
+    .author-section {
+        padding: 15px 12px;
+    }
+    
+    .author-label {
+        font-size: 0.8rem;
+    }
+    
+    .author-name {
+        font-size: 1.05rem;
+        line-height: 1.4;
+    }
+    
+    .collaboration-section {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+    
+    .collaboration-label {
+        font-size: 0.6rem;
+    }
+    
+    .collaboration-name {
+        font-size: 0.8rem;
+    }
+    
+    .description-section {
+        padding: 18px 15px;
+        gap: 15px;
+    }
+    
+    .description-text {
+        font-size: 0.92rem;
+        text-indent: 18px;
+        line-height: 1.7;
+    }
+    
+    .description-text.highlight {
+        font-size: 1rem;
+        padding: 15px 12px;
+        line-height: 1.5;
+    }
+    
+    .cover-footer {
+        padding: 18px 12px;
+        margin-top: 15px;
+    }
+    
+    .developer-label {
+        font-size: 0.8rem;
+    }
+    
+    .developer-name {
+        font-size: 0.98rem;
+        line-height: 1.4;
+    }
+    
+    .collaboration-section {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+    
+    .collaboration-label {
+        font-size: 0.55rem;
+    }
+    
+    .collaboration-name {
+        font-size: 0.75rem;
+    }
+    
+    .enter-button-container {
+        margin-top: 20px;
+        padding-top: 15px;
+    }
+    
+    .enter-button {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+        min-height: 48px;
+        letter-spacing: 0.3px;
+    }
+    
+    .about-link-cover {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .cover-content {
+        padding: 20px 15px;
+    }
+    
+    .main-title {
+        font-size: 1.9rem;
+        letter-spacing: 1px;
+    }
+    
+    .sub-title {
+        font-size: 1.1rem;
+    }
+    
+    .description-text {
+        font-size: 0.9rem;
+        text-indent: 15px;
+    }
+    
+    .description-text.highlight {
+        font-size: 0.95rem;
+        padding: 12px 10px;
+    }
+}
+
