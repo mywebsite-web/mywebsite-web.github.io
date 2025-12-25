@@ -331,15 +331,15 @@ function createCourseCard(course) {
     const topicsHTML = course.topics.map((topic, index) => {
         const topicId = `${course.code}-${index}`;
         return `
-        <li class="topic-item" data-topic-id="${topicId}">
+        <li class="topic-item" data-topic-id="${topicId}" onclick="toggleTopic(this)">
             <strong>${topic.title}</strong>
             <div class="topic-explanation">${topic.explanation}</div>
         </li>`;
     }).join('');
 
     return `
-        <div class="course-card" onclick="toggleCourse(this)">
-            <div class="course-header">
+        <div class="course-card">
+            <div class="course-header" onclick="toggleCourse(this.closest('.course-card'))">
                 <div class="course-code">${course.code}</div>
                 <span class="expand-icon">▼</span>
             </div>
@@ -349,6 +349,11 @@ function createCourseCard(course) {
             </ul>
         </div>
     `;
+}
+
+// Function to toggle topic explanation
+function toggleTopic(item) {
+    item.classList.toggle('expanded');
 }
 
 // Function to toggle course expansion

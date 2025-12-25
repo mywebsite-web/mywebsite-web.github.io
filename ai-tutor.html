@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor — Coming Soon!</title>
+    <link rel="stylesheet" href="ai-tutor.css">
+    <!-- Google Fonts for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Optional for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Linguistics Guide</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Study Guide</a></li>
+                <li><a href="resources.html">Study Resources</a></li>
+                <li><a href="flashcards.html">Flashcards</a></li>
+                <li><a href="ai-tutor.html" class="active">AI Tutor</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="test.html">Practice Test</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <!-- Removed standalone header -->
+
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="badge">Coming Soon</div>
+                <h1 class="headline">AI Tutor — Coming Soon!</h1>
+                <p class="subheading">We’re building an amazing AI-powered study assistant to help you learn better.</p>
+                
+                <div class="countdown-container" id="countdown">
+                    <div class="time-unit">
+                        <span class="number" id="days">00</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="hours">00</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes">00</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds">00</span>
+                        <span class="label">Seconds</span>
+                    </div>
+                </div>
+
+                <button class="cta-button" id="notifyBtn">Notify Me</button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="social-links">
+                <!-- Using simple text or SVGs if fontawesome fails, but sticking to text/simple structure for standalone -->
+                <a href="https://chat.whatsapp.com/CclIOEu7hd4D7vOtmHFWwl?mode=hqrt2" class="social-link" target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
+            
+            </div>
+            <p class="copyright">&copy; 2025 Linguistics Exam Prep. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Email Signup Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-content">
+                <h2>Get Notified</h2>
+                <p>Be the first to know when our AI Tutor launches.</p>
+                <form class="signup-form" id="signupForm">
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Enter your email address" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Join Waitlist</button>
+                </form>
+                <p class="success-message" id="successMessage" style="display: none;">Thanks! We'll keep you posted.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="ai-tutor.js"></script>
+</body>
+</html>

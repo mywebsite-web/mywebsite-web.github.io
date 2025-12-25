@@ -66,6 +66,8 @@ function initSearch() {
                     hasMatch = true;
                     // Auto-expand course if topic matches
                     card.classList.add('expanded');
+                    // Auto-expand topic to show explanation if it matches
+                    topic.classList.add('expanded');
                 } else {
                     topic.style.display = 'none';
                     topic.classList.remove('search-highlight');

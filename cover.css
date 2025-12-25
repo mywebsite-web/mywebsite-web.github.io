@@ -99,504 +99,133 @@ body {
     padding: 20px;
     background: #f8f9fa;
     border-radius: 8px;
-    border-left: 5px solid #3498db;
+    border: 1px solid #e9ecef;
 }
 
-.author-label {
+.author-label, .collaboration-label {
     font-size: 0.9rem;
-    color: #7f8c8d;
-    margin-bottom: 8px;
     text-transform: uppercase;
+    color: #7f8c8d;
     letter-spacing: 1px;
+    margin-bottom: 5px;
 }
 
-.author-name {
+.author-name, .collaboration-name {
     font-size: 1.4rem;
     font-weight: 600;
     color: #2c3e50;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-bottom: 0;
 }
 
-/* Collaboration Section - Sponsor Style */
 .collaboration-section {
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid #e0e0e0;
-    text-align: center;
-}
-
-.collaboration-label {
-    font-size: 0.7rem;
-    color: #95a5a6;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 500;
-}
-
-.collaboration-name {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #7f8c8d;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: italic;
-    margin: 0;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ced4da;
 }
 
 .description-section {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    line-height: 1.8;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .description-text {
+    margin-bottom: 20px;
     font-size: 1.1rem;
-    line-height: 1.8;
-    color: #34495e;
-    text-align: justify;
-    text-indent: 30px;
 }
 
-.description-text.highlight {
-    text-align: center;
-    font-size: 1.2rem;
+.highlight {
     font-weight: 600;
-    color: #2c3e50;
-    font-style: italic;
-    text-indent: 0;
-    padding: 20px;
-    background: linear-gradient(135deg, #e8f4f8 0%, #f0f7ff 100%);
-    border-radius: 8px;
-    border-left: 5px solid #3498db;
-    margin-top: 10px;
+    color: #3498db;
+    font-size: 1.2rem;
+    margin-top: 30px;
 }
 
 .cover-footer {
     text-align: center;
-    padding: 30px 20px;
     margin-top: 40px;
-    border-top: 2px solid #e0e0e0;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.developer-label {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
     font-size: 0.9rem;
     color: #7f8c8d;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.developer-name {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.developer-name strong {
-    color: #3498db;
-    font-weight: 700;
-}
-
-.developer-name b {
-    color: #27ae60;
-    font-weight: 700;
 }
 
 .enter-button-container {
     text-align: center;
     margin-top: 40px;
-    padding-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-.cover-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    align-items: center;
-}
-
-.about-link-cover {
-    display: inline-block;
-    color: #3498db;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: all 0.3s ease;
-    padding: 10px 25px;
-    border-radius: 6px;
-    background: rgba(52, 152, 219, 0.1);
-    border: 2px solid rgba(52, 152, 219, 0.3);
-}
-
-.about-link-cover:hover {
-    color: #2980b9;
-    background: rgba(52, 152, 219, 0.15);
-    border-color: rgba(52, 152, 219, 0.5);
-    transform: translateY(-2px);
 }
 
 .enter-button {
     display: inline-block;
-    padding: 18px 50px;
+    padding: 15px 40px;
     background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
     font-size: 1.2rem;
     font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-    letter-spacing: 1px;
     text-transform: uppercase;
-    border: 2px solid transparent;
+    letter-spacing: 1px;
 }
 
 .enter-button:hover {
-    background: linear-gradient(135deg, #2980b9 0%, #1f6391 100%);
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
-    border-color: #3498db;
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4);
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
 }
 
-.enter-button:active {
-    transform: translateY(-1px);
+.cover-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-/* Tablet styles */
-@media (max-width: 1024px) {
-    .cover-content {
-        padding: 50px 40px;
-    }
-    
-    .main-title {
-        font-size: 3.5rem;
-    }
-    
-    .sub-title {
-        font-size: 1.6rem;
-    }
+.about-link-cover {
+    color: #7f8c8d;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    font-weight: 500;
 }
 
-/* Mobile styles - Book-like appearance */
+.about-link-cover:hover {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.ai-alert {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-left: 5px solid #ff9800;
+    color: #e65100;
+    padding: 15px 20px;
+    border-radius: 4px;
+    margin: 20px auto;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    max-width: 80%;
+}
+
 @media (max-width: 768px) {
-    body {
-        padding: 8px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .cover-container {
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    .cover-page {
-        border-radius: 8px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
-                    0 0 0 1px rgba(0, 0, 0, 0.1),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        min-height: calc(100vh - 16px);
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .cover-content {
-        padding: 35px 25px;
-        min-height: calc(100vh - 16px);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 25px;
-    }
-    
-    .cover-header {
-        margin-bottom: 25px;
-        padding-bottom: 25px;
-        border-bottom: 2px solid #e0e0e0;
-        flex-shrink: 0;
-    }
-    
     .main-title {
-        font-size: 2.8rem;
-        letter-spacing: 2px;
-        line-height: 1.15;
-        margin-bottom: 12px;
-        word-break: break-word;
-    }
-    
-    .sub-title {
-        font-size: 1.4rem;
-        letter-spacing: 1.5px;
-        line-height: 1.3;
-    }
-    
-    .cover-body {
-        gap: 25px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .author-section {
-        padding: 18px 15px;
-        border-radius: 6px;
-        flex-shrink: 0;
-    }
-    
-    .author-label {
-        font-size: 0.85rem;
-    }
-    
-    .author-name {
-        font-size: 1.15rem;
-        line-height: 1.4;
-        word-break: break-word;
-    }
-    
-    .collaboration-section {
-        margin-top: 15px;
-        padding-top: 15px;
-    }
-    
-    .collaboration-label {
-        font-size: 0.65rem;
-    }
-    
-    .collaboration-name {
-        font-size: 0.85rem;
-    }
-
-    .description-section {
-        padding: 22px 18px;
-        gap: 18px;
-        border-radius: 6px;
-        flex: 1;
-    }
-    
-    .description-text {
-        font-size: 0.98rem;
-        text-indent: 20px;
-        line-height: 1.75;
-        text-align: justify;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-    
-    .description-text.highlight {
-        font-size: 1.05rem;
-        padding: 18px 15px;
-        line-height: 1.6;
-        text-indent: 0;
-        margin-top: 5px;
-    }
-    
-    .cover-footer {
-        padding: 22px 15px;
-        margin-top: 20px;
-        border-radius: 6px;
-        flex-shrink: 0;
-    }
-    
-    .developer-label {
-        font-size: 0.85rem;
-        margin-bottom: 8px;
-    }
-    
-    .developer-name {
-        font-size: 1.05rem;
-        line-height: 1.5;
-    }
-    
-    .enter-button-container {
-        margin-top: 25px;
-        padding-top: 20px;
-        flex-shrink: 0;
-    }
-    
-    .enter-button {
-        padding: 16px 35px;
-        font-size: 1rem;
-        width: 100%;
-        max-width: 100%;
-        letter-spacing: 0.5px;
-        border-radius: 6px;
-        min-height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .about-link-cover {
-        width: 100%;
-        text-align: center;
-        padding: 12px 20px;
-    }
-}
-
-/* Small mobile styles - Optimized book cover */
-@media (max-width: 480px) {
-    body {
-        padding: 5px;
-    }
-    
-    .cover-page {
-        border-radius: 6px;
-        min-height: calc(100vh - 10px);
-    }
-    
-    .cover-content {
-        padding: 25px 18px;
-        min-height: calc(100vh - 10px);
-        gap: 20px;
-    }
-    
-    .cover-header {
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-    }
-    
-    .main-title {
-        font-size: 2.2rem;
-        letter-spacing: 1.5px;
-        line-height: 1.1;
-        margin-bottom: 10px;
+        font-size: 2.5rem;
     }
     
     .sub-title {
         font-size: 1.2rem;
-        letter-spacing: 1px;
-        line-height: 1.25;
     }
     
-    .cover-body {
-        gap: 20px;
-    }
-    
-    .author-section {
-        padding: 15px 12px;
-    }
-    
-    .author-label {
-        font-size: 0.8rem;
-    }
-    
-    .author-name {
-        font-size: 1.05rem;
-        line-height: 1.4;
-    }
-    
-    .collaboration-section {
-        margin-top: 12px;
-        padding-top: 12px;
-    }
-    
-    .collaboration-label {
-        font-size: 0.6rem;
-    }
-    
-    .collaboration-name {
-        font-size: 0.8rem;
-    }
-    
-    .description-section {
-        padding: 18px 15px;
-        gap: 15px;
-    }
-    
-    .description-text {
-        font-size: 0.92rem;
-        text-indent: 18px;
-        line-height: 1.7;
-    }
-    
-    .description-text.highlight {
-        font-size: 1rem;
-        padding: 15px 12px;
-        line-height: 1.5;
-    }
-    
-    .cover-footer {
-        padding: 18px 12px;
-        margin-top: 15px;
-    }
-    
-    .developer-label {
-        font-size: 0.8rem;
-    }
-    
-    .developer-name {
-        font-size: 0.98rem;
-        line-height: 1.4;
-    }
-    
-    .collaboration-section {
-        margin-top: 10px;
-        padding-top: 10px;
-    }
-    
-    .collaboration-label {
-        font-size: 0.55rem;
-    }
-    
-    .collaboration-name {
-        font-size: 0.75rem;
-    }
-    
-    .enter-button-container {
-        margin-top: 20px;
-        padding-top: 15px;
+    .cover-content {
+        padding: 30px 20px;
     }
     
     .enter-button {
-        padding: 14px 25px;
-        font-size: 0.95rem;
-        min-height: 48px;
-        letter-spacing: 0.3px;
-    }
-    
-    .about-link-cover {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        padding: 12px 30px;
+        font-size: 1rem;
     }
 }
-
-/* Extra small devices */
-@media (max-width: 360px) {
-    .cover-content {
-        padding: 20px 15px;
-    }
-    
-    .main-title {
-        font-size: 1.9rem;
-        letter-spacing: 1px;
-    }
-    
-    .sub-title {
-        font-size: 1.1rem;
-    }
-    
-    .description-text {
-        font-size: 0.9rem;
-        text-indent: 15px;
-    }
-    
-    .description-text.highlight {
-        font-size: 0.95rem;
-        padding: 12px 10px;
-    }
-}
-
