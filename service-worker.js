@@ -8,7 +8,8 @@ const ASSETS_TO_CACHE = [
   '/styles.css',
   '/cover.css',
   '/script.js',
-  '/icon.svg',
+  '/icon-192.png',
+  '/icon-512.png',
   '/manifest.json'
 ];
 
