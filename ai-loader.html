@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting AI Tutor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0f172a; --text: #ffffff; }
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            padding: 24px;
+            max-width: 640px;
+        }
+        .headline {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+        .subheading {
+            margin-top: 12px;
+            font-size: clamp(1rem, 2.2vw, 1.25rem);
+            opacity: 0.85;
+            font-weight: 500;
+        }
+        .timer {
+            margin-top: 16px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        .open-now {
+            display: inline-block;
+            margin-top: 18px;
+            background-color: #28a745;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 16px;
+            border-radius: 22px;
+            border: 2px solid #1e7e34;
+            transition: all 0.2s ease;
+        }
+        .open-now:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
+        }
+    </style>
+    <script>
+        (function(){
+            const TARGET_URL = 'https://lin-ai-mpg5.onrender.com';
+            
+            async function checkServer() {
+                const statusEl = document.getElementById('redirectTimer');
+                
+                try {
+                    // Attempt to fetch the URL. 
+                    // 'no-cors' allows us to ping it even if CORS headers aren't set.
+                    // The promise resolves when the server accepts the connection and sends headers.
+                    // Since Render delays the response until the service is up, this will "wait" for the warm-up.
+                    await fetch(TARGET_URL, { 
+                        mode: 'no-cors',
+                        cache: 'no-store' 
+                    });
+                    
+                    // Once resolved, the server is awake.
+                    if (statusEl) statusEl.textContent = 'Server ready! Redirecting...';
+                    window.location.href = TARGET_URL;
+                    
+                } catch (error) {
+                    // If there's a network error (e.g. timeout), retry.
+                    console.log('Ping failed, retrying...', error);
+                    setTimeout(checkServer, 2000);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                checkServer();
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="headline">🤖 Starting AI Tutor</div>
+        <div class="subheading">Please wait… preparing your study assistant</div>
+        <div id="redirectTimer" class="timer">Waking up the server... (may take ~1 min)</div>
+        <a class="open-now" href="https://lin-ai-mpg5.onrender.com" rel="noopener noreferrer">Open Now</a>
+    </div>
+</body>
+</html>

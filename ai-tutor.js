@@ -128,7 +128,6 @@ const initModal = () => {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    countdown();
     initModal();
     initMobileMenu();
 });

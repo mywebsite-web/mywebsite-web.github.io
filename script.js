@@ -327,6 +327,10 @@ const courses200 = [
 ];
 
 // Function to create course card HTML
+function getCourseId(code) {
+    return 'course-' + String(code).toLowerCase().replace(/\s+/g, '-');
+}
+
 function createCourseCard(course) {
     const topicsHTML = course.topics.map((topic, index) => {
         const topicId = `${course.code}-${index}`;
@@ -338,7 +342,7 @@ function createCourseCard(course) {
     }).join('');
 
     return `
-        <div class="course-card">
+        <div class="course-card" id="${getCourseId(course.code)}">
             <div class="course-header" onclick="toggleCourse(this.closest('.course-card'))">
                 <div class="course-code">${course.code}</div>
                 <span class="expand-icon">▼</span>
@@ -349,6 +353,23 @@ function createCourseCard(course) {
             </ul>
         </div>
     `;
+}
+
+function renderTOC(tocEl) {
+    const buildItems = (arr) => arr.map(c => {
+        const id = getCourseId(c.code);
+        return `<div class="toc-item"><span class="toc-code">${c.code}</span><a class="toc-link" href="#${id}">${c.title}</a></div>`;
+    }).join('');
+    const html =
+        `<div class="toc-group">
+            <div class="toc-group-title">100 Level</div>
+            <div class="toc-grid">${buildItems(courses100)}</div>
+        </div>
+        <div class="toc-group">
+            <div class="toc-group-title">200 Level</div>
+            <div class="toc-grid">${buildItems(courses200)}</div>
+        </div>`;
+    tocEl.innerHTML = html;
 }
 
 // Function to toggle topic explanation
@@ -365,6 +386,10 @@ function toggleCourse(card) {
 function init() {
     const container100 = document.getElementById('coursesContainer100');
     const container200 = document.getElementById('coursesContainer200');
+    const toc = document.getElementById('tocContainer');
+    const tocSection = document.getElementById('tocSection');
+    const tocToggle = document.getElementById('tocToggle');
+    const tocPanel = document.getElementById('tocPanel');
     
     if (container100) {
         courses100.forEach(course => {
@@ -375,6 +400,17 @@ function init() {
     if (container200) {
         courses200.forEach(course => {
             container200.innerHTML += createCourseCard(course);
+        });
+    }
+    
+    if (toc) {
+        renderTOC(toc);
+    }
+    if (tocToggle && tocSection && tocPanel) {
+        tocToggle.addEventListener('click', () => {
+            const isOpen = tocSection.classList.toggle('open');
+            tocToggle.setAttribute('aria-expanded', String(isOpen));
+            tocPanel.hidden = !isOpen;
         });
     }
     

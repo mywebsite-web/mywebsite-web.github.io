@@ -42,13 +42,14 @@
                 <div class="header-controls">
                     <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode">🌙</button>
                     <a href="test.html" class="test-button">Take Practice Test</a>
+                    <a href="ai-tutor.html" class="ai-tutor-button">Open AI Tutor</a>
                 </div>
             </div>
-            
+        
             <!-- Scrolling Headline -->
             <div class="marquee-container">
                 <div class="marquee-content">
-                    Linguistics Exam Preparation Guide • Master Phonology, Morphology, Syntax & More • Practice Tests Available • Join Our Community for updates on the website and more
+                     Join Our Community for updates on the website and more
                 </div>
             </div>
 
@@ -70,6 +71,15 @@
         </header>
 
         <main>
+            <section class="toc-section" id="tocSection">
+                <button class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="tocContainer">
+                    Table of Contents <span class="chev">▼</span>
+                </button>
+                <div class="toc-panel" id="tocPanel" hidden>
+                    <div id="tocContainer"></div>
+                    <p class="toc-note">More courses will be added soon.</p>
+                </div>
+            </section>
             <div class="level-section">
                 <h2 class="level-title">100 Level Courses</h2>
                 <div class="courses-grid" id="coursesContainer100">
