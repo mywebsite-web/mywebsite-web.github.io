@@ -64,33 +64,54 @@
     <script>
         (function(){
             const TARGET_URL = 'https://lin-ai-mpg5.onrender.com';
+            let serverReady = false;
+            let secondsLeft = 40;
             
             async function checkServer() {
                 const statusEl = document.getElementById('redirectTimer');
                 
                 try {
-                    // Attempt to fetch the URL. 
-                    // 'no-cors' allows us to ping it even if CORS headers aren't set.
-                    // The promise resolves when the server accepts the connection and sends headers.
-                    // Since Render delays the response until the service is up, this will "wait" for the warm-up.
                     await fetch(TARGET_URL, { 
                         mode: 'no-cors',
                         cache: 'no-store' 
                     });
                     
-                    // Once resolved, the server is awake.
-                    if (statusEl) statusEl.textContent = 'Server ready! Redirecting...';
-                    window.location.href = TARGET_URL;
+                    serverReady = true;
+                    if (statusEl && secondsLeft <= 0) {
+                        statusEl.textContent = 'Server ready! Redirecting...';
+                        window.location.href = TARGET_URL;
+                    }
                     
                 } catch (error) {
-                    // If there's a network error (e.g. timeout), retry.
-                    console.log('Ping failed, retrying...', error);
                     setTimeout(checkServer, 2000);
                 }
             }
 
+            function startCountdown() {
+                const statusEl = document.getElementById('redirectTimer');
+                const interval = setInterval(() => {
+                    secondsLeft -= 1;
+                    if (secondsLeft > 0) {
+                        if (serverReady) {
+                            statusEl.textContent = `Server ready — opening in ${secondsLeft}s`;
+                        } else {
+                            statusEl.textContent = `Warming up server — opening in ${secondsLeft}s`;
+                        }
+                    } else {
+                        clearInterval(interval);
+                        if (serverReady) {
+                            statusEl.textContent = 'Server ready! Redirecting...';
+                            window.location.href = TARGET_URL;
+                        } else {
+                            statusEl.textContent = 'Still preparing server… opening when ready';
+                        }
+                    }
+                }, 1000);
+            }
+
             document.addEventListener('DOMContentLoaded', function(){
                 checkServer();
+                startCountdown();
             });
         })();
     </script>
@@ -99,8 +120,7 @@
     <div class="container">
         <div class="headline">🤖 Starting AI Tutor</div>
         <div class="subheading">Please wait… preparing your study assistant</div>
-        <div id="redirectTimer" class="timer">Waking up the server... (may take ~1 min)</div>
-        <a class="open-now" href="https://lin-ai-mpg5.onrender.com" rel="noopener noreferrer">Open Now</a>
+        <div id="redirectTimer" class="timer">Warming up server — opening in 40s</div>
     </div>
 </body>
 </html>
